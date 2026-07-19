@@ -1,0 +1,30 @@
+name: Android CI/CD Build
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: reactnativecommunity/react-native-android:latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Run Unit Tests
+        run: ./gradlew testDebugUnitTest
+
+      - name: Build Debug APK
+        run: ./gradlew assembleDebug
+
+      - name: Upload Debug APK Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: debug-apk
+          path: app/build/outputs/apk/debug/app-debug.apk
