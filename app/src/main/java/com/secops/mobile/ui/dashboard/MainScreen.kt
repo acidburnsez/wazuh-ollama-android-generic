@@ -8,6 +8,7 @@ import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -18,6 +19,7 @@ import com.secops.mobile.ui.theme.*
 enum class HomelabTab(val title: String, val icon: androidx.compose.ui.graphics.vector.ImageVector) {
     Overview("Overview", Icons.Default.Home),
     Infrastructure("Infrastructure", Icons.Default.Build),
+    Alerts("Alerts", Icons.Default.Warning),
     Security("Security", Icons.Default.Lock),
     Portal("Portal", Icons.Default.List)
 }
@@ -92,6 +94,7 @@ fun MainScreen(
             when (currentTab) {
                 HomelabTab.Overview -> OverviewScreen()
                 HomelabTab.Infrastructure -> InfrastructureScreen()
+                HomelabTab.Alerts -> AlertManagerScreen()
                 HomelabTab.Security -> DashboardScreen(
                     onNavigateToAlerts = onNavigateToAlerts,
                     onNavigateToAgents = onNavigateToAgents,
